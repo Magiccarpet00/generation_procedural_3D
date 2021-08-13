@@ -14,10 +14,7 @@ public class Grid : MonoBehaviour
     public static int GRID_SIZE_Y = 1;
     public static int GRID_SIZE_Z = 8;
 
-    public GameObject preCell;
-
-    public GameObject fullPlain;
-    public GameObject fullWater;    
+    public GameObject preCell; 
 
     public Dictionary<TypeFloor, GameObject> nameToTexture;
 
@@ -35,8 +32,8 @@ public class Grid : MonoBehaviour
     {
         cells = new GameObject[GRID_SIZE_X, GRID_SIZE_Y, GRID_SIZE_Z];
         nameToTexture = new Dictionary<TypeFloor, GameObject>();
-        nameToTexture.Add(TypeFloor.FULL_PLAIN, fullPlain);
-        nameToTexture.Add(TypeFloor.FULL_WATER, fullWater);
+        nameToTexture.Add(TypeFloor.FULL_PLAIN, Texture.instance.plainRDLU);
+        nameToTexture.Add(TypeFloor.FULL_WATER, Texture.instance.waterRDLU);
         BuildGrid();
     }
 

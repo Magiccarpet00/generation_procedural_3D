@@ -369,6 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1436969739}
   - component: {fileID: 1436969738}
+  - component: {fileID: 1436969740}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -389,8 +390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preCell: {fileID: 7436156172985269579, guid: ce4d88da29a613846bec3c504e210855, type: 3}
-  fullPlain: {fileID: 3202819153580783601, guid: e850bddaeee391d4993af07bdde4e396, type: 3}
-  fullWater: {fileID: 3470419077151400461, guid: ad0cf0278a8891b4eac2328f5904c0ff, type: 3}
 --- !u!4 &1436969739
 Transform:
   m_ObjectHideFlags: 0
@@ -405,6 +404,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1436969740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436969737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262bb6650906fa241b04f0fbc41f9527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plainRDLU: {fileID: 3202819153580783601, guid: e850bddaeee391d4993af07bdde4e396, type: 3}
+  waterRDLU: {fileID: 3470419077151400461, guid: ad0cf0278a8891b4eac2328f5904c0ff, type: 3}
+  plainRD_waterLU: {fileID: 2895469738044614159, guid: 42746ed9e423fcd43ae0383da70fe3ab, type: 3}
+  plainDL_waterUR: {fileID: 8386821195203702280, guid: e77b55e009e3b3347a1a6d495620ce67, type: 3}
+  plainLU_waterRD: {fileID: 3517644128913083573, guid: ad691f717504e1341b03adae36c0afa7, type: 3}
+  plainUR_waterDL: {fileID: 1312926485843926118, guid: 48ca66c055409e144997f7d993baed7b, type: 3}
+  plainRDL_waterU: {fileID: 7051048057801066689, guid: ed94780c0b5141e4780dbf45c8ce4497, type: 3}
+  plainDLU_waterR: {fileID: 4774076271189305075, guid: 52d347b732807d549ae094d506752b33, type: 3}
+  plainLUR_waterD: {fileID: 2595056440381109937, guid: 58a8cc45e9591b2439aa95b4aac3c620, type: 3}
+  plainURD_waterL: {fileID: 6156089556918554799, guid: bb00a298ad9d1c94eb2b5a053b2c5eba, type: 3}
 --- !u!1 &2146195999
 GameObject:
   m_ObjectHideFlags: 0
