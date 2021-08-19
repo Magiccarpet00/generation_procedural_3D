@@ -9,7 +9,10 @@ public class Texture : MonoBehaviour
     {
         instance = this;
     }
-    
+
+    // Pour la les plaine qui on des border en river
+    public Dictionary<string, GameObject> maskBorderOfRiver = new Dictionary<string, GameObject>();
+
     // RIGHT -- DOWN -- LEFT -- UP
     // On tourne dans le sens trigonometrique, et on commence par Right
 
@@ -29,7 +32,12 @@ public class Texture : MonoBehaviour
     public GameObject plainLUR_waterD;
     public GameObject plainURD_waterL;
 
-
-
+    private void Start()
+    {
+        maskBorderOfRiver.Add("1000", plainDLU_waterR);
+        maskBorderOfRiver.Add("0100", plainLUR_waterD);
+        maskBorderOfRiver.Add("0010", plainURD_waterL);
+        maskBorderOfRiver.Add("0001", plainRDL_waterU);
+    }
 
 }

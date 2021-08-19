@@ -16,11 +16,16 @@ public class Grid : MonoBehaviour
 
     public GameObject preCell; 
 
+    // On l'uttilise a la toute fin du programe pour charger la texture d'un celules
     public Dictionary<TypeFloor, GameObject> nameToTexture;
 
+    public Dictionary<string, TypeFloor> maskBorderOfRiver = new Dictionary<string, TypeFloor>();
+
+
+
+
+    // Inutile lol
     public Dictionary<Vector3, Cell> CellsPos = new Dictionary<Vector3, Cell>(); // Une variable qui permet de connaitre la celule si on lui donne des coordonnée
-
-
 
     public static Grid instance;
     private void Awake()
@@ -30,10 +35,43 @@ public class Grid : MonoBehaviour
 
     private void Start()
     {
+        // Le Gros tableau en 3D
         cells = new GameObject[GRID_SIZE_X, GRID_SIZE_Y, GRID_SIZE_Z];
+
+
+
+        // Dictonaire de ShapeTheLand()
         nameToTexture = new Dictionary<TypeFloor, GameObject>();
         nameToTexture.Add(TypeFloor.FULL_PLAIN, Texture.instance.plainRDLU);
         nameToTexture.Add(TypeFloor.FULL_WATER, Texture.instance.waterRDLU);
+
+        nameToTexture.Add(TypeFloor.PLAIN_DownLeftTop_WATER_Right, Texture.instance.plainDLU_waterR);
+        nameToTexture.Add(TypeFloor.PLAIN_RightLeftTop_WATER_Down, Texture.instance.plainLUR_waterD);
+        nameToTexture.Add(TypeFloor.PLAIN_RightDownTop_WATER_Left, Texture.instance.plainURD_waterL);
+        nameToTexture.Add(TypeFloor.PLAIN_RightDownLeft_WATER_Top, Texture.instance.plainRDL_waterU);
+
+        nameToTexture.Add(TypeFloor.PLAIN_DownRight_WATER_LeftTop, Texture.instance.plainRD_waterLU);
+        nameToTexture.Add(TypeFloor.PLAIN_DownLeft_WATER_TopRight, Texture.instance.plainDL_waterUR);
+        nameToTexture.Add(TypeFloor.PLAIN_TopLeft_WATER_RightDown, Texture.instance.plainLU_waterRD);
+        nameToTexture.Add(TypeFloor.PLAIN_TopRight_WATER_LeftDown, Texture.instance.plainUR_waterDL);
+
+
+        // Dictonnaire de mask pour les plaine avec une bordure en water
+        // Avec 1 bord de water
+        maskBorderOfRiver.Add("1000", TypeFloor.PLAIN_DownLeftTop_WATER_Right);
+        maskBorderOfRiver.Add("0100", TypeFloor.PLAIN_RightLeftTop_WATER_Down);
+        maskBorderOfRiver.Add("0010", TypeFloor.PLAIN_RightDownTop_WATER_Left);
+        maskBorderOfRiver.Add("0001", TypeFloor.PLAIN_RightDownLeft_WATER_Top);
+        // Avec 2 bord de water
+        maskBorderOfRiver.Add("1100", TypeFloor.PLAIN_TopLeft_WATER_RightDown);
+        maskBorderOfRiver.Add("0110", TypeFloor.PLAIN_TopRight_WATER_LeftDown);
+        maskBorderOfRiver.Add("0011", TypeFloor.PLAIN_DownRight_WATER_LeftTop);
+        maskBorderOfRiver.Add("1001", TypeFloor.PLAIN_DownLeft_WATER_TopRight);
+
+
+
+
+
         BuildGrid();
     }
 
@@ -43,8 +81,6 @@ public class Grid : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-
-
 
     } // Pour reload avec R
 
@@ -80,6 +116,21 @@ public class Grid : MonoBehaviour
         CheckAllFloorNeighborCell();
 
         LetTheRiverFlow(); // Crée la river
+                          
+
+        for (int x = 0; x < GRID_SIZE_X; x++)
+        {
+            for (int y = 0; y < GRID_SIZE_Y; y++)
+            {
+                for (int z = 0; z < GRID_SIZE_Z; z++)
+                {
+                    /*string mask = cells[x, y, z].GetComponent<Cell>().BorderOfRiver();*/ // Crée les bordure de la river
+
+                    //cells[x, y, z].GetComponent<Cell>().typeFloor = maskBorderOfRiver[mask];
+                }
+            }
+        }
+
 
         // Shape the land c'est tout a la fin
         ShapeTheLand(); // Donne de la texture a toute les cells
@@ -127,7 +178,7 @@ public class Grid : MonoBehaviour
                 {
                     bool SetFullWatter = cells[x2, y2, z2].GetComponent<Cell>().More3NeighborIsFullWater();
 
-                    if(SetFullWatter == true)
+                    if (SetFullWatter == true)
                     {
                         cells[x2, y2, z2].GetComponent<Cell>().typeFloor = TypeFloor.FULL_WATER;
                     }
